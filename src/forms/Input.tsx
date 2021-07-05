@@ -1,5 +1,5 @@
 import * as React from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 
 import { Spacer } from "../Spacer";
 import { TextCss } from "./TextCss";
@@ -106,46 +106,64 @@ export const Input: React.FC<InputProps> = ({
 };
 
 const InputContainer = styled.div`
-  display: flex;
-  align-items: center;
-  background: ${({ theme }) => theme.form.input.backgroundColor};
-  border: 1px solid ${({ theme }) => theme.form.input.borderColor};
-  cursor: text;
-  height: ${({ theme }) => theme.form.input.height};
-  padding: 0;
+  ${(props) => {
+    const {
+      form: {
+        input: {
+          backgroundColor,
+          disabledBackgroundColor,
+          errorColor,
+          height,
+          borderColor,
+          focusBorderColor,
+          placeholderColor,
+        },
+      },
+    } = props.theme;
 
-  &.is-disabled {
-    background: ${({ theme }) => theme.form.input.disabledBackgroundColor};
-  }
+    return css`
+      display: flex;
+      align-items: center;
+      background: ${backgroundColor};
+      border: 1px solid ${borderColor};
+      cursor: text;
+      height: ${height};
+      padding: 0;
 
-  :focus,
-  :focus-within {
-    border: 1px solid ${({ theme }) => theme.form.input.focusBorderColor};
-  }
+      &.is-disabled {
+        background: ${disabledBackgroundColor};
+      }
 
-  &.has-error {
-    border: 1px solid ${({ theme }) => theme.form.input.errorColor};
-  }
+      :focus,
+      :focus-within {
+        border: 1px solid ${focusBorderColor};
+      }
 
-  input {
-    padding: 0;
-    background: none;
-    cursor: inherit;
-    border: 0;
-    appearance: none;
-    outline: none;
-    flex: 1;
-    ${TextCss}
+      &.has-error {
+        border: 1px solid ${errorColor};
+      }
 
-    :invalid {
-      appearance: none;
-      box-shadow: none;
-    }
+      input {
+        padding: 0;
+        background: none;
+        cursor: inherit;
+        border: 0;
+        appearance: none;
+        outline: none;
+        flex: 1;
+        ${TextCss}
 
-    ::placeholder {
-      color: ${({ theme }) => theme.form.input.placeholderColor};
-    }
-  }
+        :invalid {
+          appearance: none;
+          box-shadow: none;
+        }
+
+        ::placeholder {
+          color: ${placeholderColor};
+        }
+      }
+    `;
+  }}
 `;
 
 const computeInputClasses = (
