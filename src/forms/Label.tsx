@@ -1,6 +1,6 @@
 import * as React from "react";
 import styled from "styled-components";
-import { Text } from "./Text";
+import { TextCss } from "./TextCss";
 
 type LabelProps = {
   hasError?: boolean;
@@ -12,8 +12,10 @@ export const Label: React.FC<LabelProps> = ({ hasError, children }) => {
   return <LabelElement className={className}>{children}</LabelElement>;
 };
 
-const LabelElement = styled(Text).attrs({ as: "label" })`
+const LabelElement = styled.label`
+  ${TextCss}
+
   &.has-error {
-    color: red;
+    color: ${(props) => props.theme.form.input.errorColor};
   }
 `;

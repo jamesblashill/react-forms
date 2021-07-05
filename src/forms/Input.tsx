@@ -2,6 +2,7 @@ import * as React from "react";
 import styled from "styled-components";
 
 import { Spacer } from "../Spacer";
+import { TextCss } from "./TextCss";
 
 export type InputTheme = {
   backgroundColor: string;
@@ -14,7 +15,6 @@ export type InputTheme = {
   font: {
     family: string;
     size: string;
-    color: string;
   };
 };
 
@@ -29,7 +29,20 @@ export const InputThemeDefault: InputTheme = {
   font: {
     family: "Helvetica",
     size: "12px",
-    color: "#333",
+  },
+};
+
+export const InputThemeDark: InputTheme = {
+  backgroundColor: "#333",
+  disabledBackgroundColor: "#ccc",
+  errorColor: "#b50303",
+  height: "42px",
+  borderColor: "#666",
+  focusBorderColor: "#fff",
+  placeholderColor: "#aaa",
+  font: {
+    family: "Helvetica",
+    size: "12px",
   },
 };
 
@@ -45,7 +58,6 @@ export type InputProps = {
    * Specifies visual details of the input component. If none provided,
    * then `InputThemeDefault` will be used.
    */
-  theme?: InputTheme;
   inputElementProps?: React.HTMLAttributes<HTMLInputElement>;
   value: string;
   testId?: string;
@@ -93,26 +105,26 @@ export const Input: React.FC<InputProps> = ({
   );
 };
 
-const createInputContainer = (theme = InputThemeDefault) => styled.div`
+const InputContainer = styled.div`
   display: flex;
   align-items: center;
-  background: ${theme.backgroundColor};
-  border: 1px solid ${theme.borderColor};
+  background: ${({ theme }) => theme.form.input.backgroundColor};
+  border: 1px solid ${({ theme }) => theme.form.input.borderColor};
   cursor: text;
-  height: ${theme.height};
+  height: ${({ theme }) => theme.form.input.height};
   padding: 0;
 
   &.is-disabled {
-    background: ${theme.disabledBackgroundColor};
+    background: ${({ theme }) => theme.form.input.disabledBackgroundColor};
   }
 
   :focus,
   :focus-within {
-    border: 1px solid ${theme.focusBorderColor};
+    border: 1px solid ${({ theme }) => theme.form.input.focusBorderColor};
   }
 
   &.has-error {
-    border: 1px solid ${theme.errorColor};
+    border: 1px solid ${({ theme }) => theme.form.input.errorColor};
   }
 
   input {
@@ -123,9 +135,7 @@ const createInputContainer = (theme = InputThemeDefault) => styled.div`
     appearance: none;
     outline: none;
     flex: 1;
-    color: ${theme.font.color};
-    font-family: ${theme.font.family};
-    font-size: ${theme.font.size};
+    ${TextCss}
 
     :invalid {
       appearance: none;
@@ -133,7 +143,7 @@ const createInputContainer = (theme = InputThemeDefault) => styled.div`
     }
 
     ::placeholder {
-      color: ${theme.placeholderColor};
+      color: ${({ theme }) => theme.form.input.placeholderColor};
     }
   }
 `;
@@ -151,5 +161,3 @@ const computeInputClasses = (
   }
   return classes.join(" ");
 };
-
-const InputContainer = createInputContainer();

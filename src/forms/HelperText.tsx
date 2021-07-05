@@ -1,11 +1,9 @@
 import styled from "styled-components";
 
-import { Text } from "./Text";
+import { TextCss } from "./TextCss";
 
-export const HelperText = styled(Text)`
-  font-size: 12px;
-  font-family: Arial, Helvetica, sans-serif;
-  color: #333;
+export const HelperText = styled.p`
+  ${TextCss}
   padding: 0;
   margin: 0;
 `;
