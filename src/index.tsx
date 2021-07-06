@@ -3,7 +3,7 @@ import { render } from "react-dom";
 import { BrowserRouter as Router, Link, Route, Switch } from "react-router-dom";
 import styled, { ThemeProvider } from "styled-components";
 import { SignupForm } from "./examples/SignupForm";
-import { InputThemeDark, InputThemeDefault } from "./forms/Input";
+import { themes } from "./forms/Input/themes";
 
 const App: React.FC<{}> = () => {
   const [darkMode, setDarkMode] = React.useState(false);
@@ -44,7 +44,7 @@ const lightModeTheme = {
   appBackgroundColor: "#fff",
   form: {
     textColor: "#333",
-    input: InputThemeDefault,
+    input: themes.light,
   },
 };
 
@@ -52,7 +52,7 @@ const darkModeTheme = {
   appBackgroundColor: "#333",
   form: {
     textColor: "#eee",
-    input: InputThemeDark,
+    input: themes.dark,
   },
 };
 

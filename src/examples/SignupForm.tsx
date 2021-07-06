@@ -3,7 +3,7 @@ import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 import styled from "styled-components";
 import { ErrorText } from "../forms/ErrorText";
 import { HelperText } from "../forms/HelperText";
-import { Input } from "../forms/Input";
+import { Input } from "../forms/Input/Input";
 import { Label } from "../forms/Label";
 import { Spacer } from "../Spacer";
 
