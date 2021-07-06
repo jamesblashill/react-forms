@@ -1,4 +1,4 @@
-import { InputTheme } from "./Input/themes";
+import { InputTheme } from "./Input";
 
 export type FormTheme = {
   input: InputTheme;
