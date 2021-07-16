@@ -1,4 +1,4 @@
-import { TextCss } from "forms/TextCss";
+import { TextCss } from "../TextCss";
 import styled, { css } from "styled-components";
 
 export const InputContainer = styled.div`
