@@ -1,5 +1,5 @@
-import { TextCss } from "../TextCss";
 import styled, { css } from "styled-components";
+import { TextCss } from "../TextCss";
 
 export const InputContainer = styled.div`
   ${(props) => {

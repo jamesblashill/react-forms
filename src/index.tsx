@@ -4,8 +4,18 @@ import { BrowserRouter as Router, Link, Route, Switch } from "react-router-dom";
 import styled, { ThemeProvider } from "styled-components";
 import { SignupForm } from "./examples/SignupForm";
 import { TypographyExample } from "./examples/Typography";
-import { lightTheme, darkTheme } from "./forms/Input";
-import { lightTheme as typographyLightTheme, darkTheme as typographyDarkTheme } from "./Typography";
+import {
+  lightTheme as buttonLightTheme,
+  darkTheme as buttonDarkTheme,
+} from "./forms/Button";
+import {
+  lightTheme as inputLightTheme,
+  darkTheme as inputDarkTheme,
+} from "./forms/Input";
+import {
+  lightTheme as typographyLightTheme,
+  darkTheme as typographyDarkTheme,
+} from "./Typography/themes";
 
 const App: React.FC<{}> = () => {
   const [darkMode, setDarkMode] = React.useState(false);
@@ -50,18 +60,20 @@ const lightModeTheme = {
   appBackgroundColor: "#fff",
   form: {
     textColor: "#333",
-    input: lightTheme,
+    input: inputLightTheme,
   },
-  typography: typographyLightTheme
+  typography: typographyLightTheme,
+  button: buttonLightTheme,
 };
 
 const darkModeTheme = {
   appBackgroundColor: "#333",
   form: {
     textColor: "#eee",
-    input: darkTheme,
+    input: inputDarkTheme,
   },
-  typography: typographyDarkTheme
+  typography: typographyDarkTheme,
+  button: buttonDarkTheme,
 };
 
 render(<App />, document.getElementById("root"));
