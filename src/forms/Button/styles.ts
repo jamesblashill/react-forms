@@ -1,7 +1,9 @@
 import styled, { css } from "styled-components";
 import { TextCss } from "../TextCss";
 
-export const StyledButtonElement = styled.button`
+export const StyledButtonElement: React.ComponentType<
+  React.HTMLProps<HTMLButtonElement>
+> = styled.button`
   ${TextCss};
   position: relative;
   display: flex;

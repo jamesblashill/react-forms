@@ -8,6 +8,7 @@ import { Input } from "../forms/Input";
 import { Label } from "../forms/Label";
 import { unboxFormEventValue } from "../forms/unboxFormEventValue";
 import { Spacer } from "../Spacer";
+import { UserTrackerContext, UserTrackerEvent } from "../UserTrackerContext";
 
 export const SignupForm: React.FC<{}> = () => {
   const [first, setFirst] = React.useState("");
@@ -19,71 +20,82 @@ export const SignupForm: React.FC<{}> = () => {
 
   const lastInvalid = last.length < 4;
 
+  const handleUserTrackerEvent = (userTrackerEvent: UserTrackerEvent) => {
+    console.log(userTrackerEvent);
+  };
+
   return (
     <Container>
-      <FormFields>
-        <FormField name="firstName">
-          <Label>
-            First Name
-            <Input
-              onChange={unboxFormEventValue(setFirst)}
-              value={first}
-              placeholder="Enter your first name"
-            />
-            <HelperText>This is your given name</HelperText>
-          </Label>
-        </FormField>
-        <FormField name="lastName">
-          <Label hasError={lastInvalid}>
-            Last Name
-            <Input
-              onChange={unboxFormEventValue(setLast)}
-              value={last}
-              placeholder="Enter your last name"
-              hasError={lastInvalid}
-            />
-            {lastInvalid && <ErrorText>Invalid last name</ErrorText>}
-          </Label>
-        </FormField>
-        <FormField name="email">
-          <Label>
-            Email
-            <Input
-              onChange={unboxFormEventValue(setEmail)}
-              value={email}
-              placeholder="your.name@example.com"
-            />
-          </Label>
-        </FormField>
-        <FormField name="phone">
-          <Label>
-            Phone
-            <Input
-              onChange={unboxFormEventValue(setPhone)}
-              value={phone}
-              placeholder="226066343"
-            />
-          </Label>
-        </FormField>
-        <FormField name="password">
-          <Label>
-            Password
-            <Input
-              onChange={unboxFormEventValue(setPassword)}
-              value={password}
-              suffixNode={
-                <ToggleShowPasswordButton
-                  showPassword={showPassword}
-                  onClick={() => setShowPassword(!showPassword)}
-                />
-              }
-              type={showPassword ? "text" : "password"}
-            />
-          </Label>
-        </FormField>
-      </FormFields>
-      <Spacer size={30} />
-      <Button>Sign Up</Button>
+      <UserTrackerContext.Provider value={{ onEvent: handleUserTrackerEvent }}>
+        <FormFields>
+          <FormField name="firstName">
+            <Label>
+              First Name
+              <Input
+                onChange={unboxFormEventValue(setFirst)}
+                value={first}
+                placeholder="Enter your first name"
+                name="firstName"
+              />
+              <HelperText>This is your given name</HelperText>
+            </Label>
+          </FormField>
+          <FormField name="lastName">
+            <Label hasError={lastInvalid}>
+              Last Name
+              <Input
+                onChange={unboxFormEventValue(setLast)}
+                value={last}
+                placeholder="Enter your last name"
+                hasError={lastInvalid}
+                name="lastName"
+              />
+              {lastInvalid && <ErrorText>Invalid last name</ErrorText>}
+            </Label>
+          </FormField>
+          <FormField name="email">
+            <Label>
+              Email
+              <Input
+                onChange={unboxFormEventValue(setEmail)}
+                value={email}
+                placeholder="your.name@example.com"
+                name="email"
+              />
+            </Label>
+          </FormField>
+          <FormField name="phone">
+            <Label>
+              Phone
+              <Input
+                onChange={unboxFormEventValue(setPhone)}
+                value={phone}
+                placeholder="226066343"
+                name="phone"
+              />
+            </Label>
+          </FormField>
+          <FormField name="password">
+            <Label>
+              Password
+              <Input
+                onChange={unboxFormEventValue(setPassword)}
+                value={password}
+                suffixNode={
+                  <ToggleShowPasswordButton
+                    showPassword={showPassword}
+                    onClick={() => setShowPassword(!showPassword)}
+                  />
+                }
+                type={showPassword ? "text" : "password"}
+                name="password"
+              />
+            </Label>
+          </FormField>
+        </FormFields>
+        <Spacer size={30} />
+        <Button>Sign Up</Button>
+      </UserTrackerContext.Provider>
     </Container>
   );
 };
