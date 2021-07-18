@@ -1,13 +1,11 @@
 import styled, { css } from "styled-components";
-import { TextCss } from "./TextCss";
+import { Typography } from "../Typography";
 
 type LabelProps = {
   hasError?: boolean;
 };
 
-export const Label = styled.label<LabelProps>`
-  ${TextCss}
-
+export const Label = styled(Typography).attrs({ as: "label" })<LabelProps>`
   ${(props) => {
     const {
       hasError,
