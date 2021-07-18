@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 import styled from "styled-components";
 import { Button } from "../forms/Button";
@@ -6,6 +6,7 @@ import { ErrorText } from "../forms/ErrorText";
 import { HelperText } from "../forms/HelperText";
 import { Input } from "../forms/Input";
 import { Label } from "../forms/Label";
+import { unboxFormEventValue } from "../forms/unboxFormEventValue";
 import { Spacer } from "../Spacer";
 
 export const SignupForm: React.FC<{}> = () => {
@@ -25,7 +26,7 @@ export const SignupForm: React.FC<{}> = () => {
           <Label>
             First Name
             <Input
-              onChange={setFirst}
+              onChange={unboxFormEventValue(setFirst)}
               value={first}
               placeholder="Enter your first name"
             />
@@ -36,7 +37,7 @@ export const SignupForm: React.FC<{}> = () => {
           <Label hasError={lastInvalid}>
             Last Name
             <Input
-              onChange={setLast}
+              onChange={unboxFormEventValue(setLast)}
               value={last}
               placeholder="Enter your last name"
               hasError={lastInvalid}
@@ -48,7 +49,7 @@ export const SignupForm: React.FC<{}> = () => {
           <Label>
             Email
             <Input
-              onChange={setEmail}
+              onChange={unboxFormEventValue(setEmail)}
               value={email}
               placeholder="your.name@example.com"
             />
@@ -57,14 +58,18 @@ export const SignupForm: React.FC<{}> = () => {
         <FormField name="phone">
           <Label>
             Phone
-            <Input onChange={setPhone} value={phone} placeholder="226066343" />
+            <Input
+              onChange={unboxFormEventValue(setPhone)}
+              value={phone}
+              placeholder="226066343"
+            />
           </Label>
         </FormField>
         <FormField name="password">
           <Label>
             Password
             <Input
-              onChange={setPassword}
+              onChange={unboxFormEventValue(setPassword)}
               value={password}
               suffixNode={
                 <ToggleShowPasswordButton

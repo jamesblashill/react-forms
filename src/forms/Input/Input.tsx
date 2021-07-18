@@ -6,21 +6,12 @@ import { InputProps } from "./types";
 
 export const Input: React.FC<InputProps> = ({
   hasError,
-  inputElementProps,
-  isDisabled,
-  onChange,
-  placeholder,
   prefixNode,
   suffixNode,
-  testId,
-  value,
-  type,
+  ...inputElementProps
 }) => {
   const inputRef = React.useRef<HTMLInputElement>(null);
-  const classNames = computeInputClasses(hasError, isDisabled);
-  const handleInputChanged = (e: React.ChangeEvent<HTMLInputElement>) => {
-    onChange(e.currentTarget.value);
-  };
+  const classNames = computeInputClasses(hasError, inputElementProps.disabled);
 
   return (
     <InputContainer
@@ -30,15 +21,7 @@ export const Input: React.FC<InputProps> = ({
       }}
     >
       {prefixNode ?? <Spacer size={16} />}
-      <input
-        ref={inputRef}
-        onChange={handleInputChanged}
-        value={value}
-        data-test-id={testId}
-        placeholder={placeholder}
-        type={type ?? "text"}
-        {...inputElementProps}
-      />
+      <input ref={inputRef} {...inputElementProps} />
       {suffixNode ?? <Spacer size={16} />}
     </InputContainer>
   );
