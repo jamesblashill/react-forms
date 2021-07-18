@@ -1,13 +1,13 @@
 import { StandardPropertiesHyphen } from "csstype";
 import styled, { DefaultTheme } from "styled-components";
 
-import { lightTheme } from "./Themes";
+import { lightTheme } from "./themes";
 import {
   TypographyVariant,
   TypographyProps,
   TypographyTags,
   TypographyVariants,
-} from "./Types";
+} from "./types";
 
 const variantTagMap: { [key in TypographyVariants]: TypographyTags } = {
   displayXL: "h1",
@@ -27,7 +27,8 @@ export const Variant = (variant: TypographyVariant) =>
     : "";
 export const Italic = "font-style: italic";
 export const Strikethrough = "text-decoration: line-through";
-export const Align = (align: StandardPropertiesHyphen["text-align"]) => `text-align: ${align}`;
+export const Align = (align: StandardPropertiesHyphen["text-align"]) =>
+  `text-align: ${align}`;
 
 export const Truncate = `
   white-space: nowrap;

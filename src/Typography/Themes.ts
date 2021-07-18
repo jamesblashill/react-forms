@@ -1,4 +1,4 @@
-import { Color, TypographyTheme, TypographyVariant } from "./Types";
+import { Color, TypographyTheme, TypographyVariant } from "./types";
 
 const variantGenerator = (
   fontFamily: TypographyVariant["font-family"],
@@ -24,8 +24,8 @@ const light: {
   primary: "#333",
   secondary: "#757575",
   tertiary: "#FFF",
-  error: "#B50303"
-}
+  error: "#B50303",
+};
 
 const dark: {
   [key in Color]: string;
@@ -33,8 +33,8 @@ const dark: {
   primary: "#FFF",
   secondary: "#757575",
   tertiary: "#333",
-  error: "#B50303"
-}
+  error: "#B50303",
+};
 
 const fonts = {
   serif: {
@@ -59,10 +59,10 @@ const fonts = {
 
 export const lightTheme: TypographyTheme = {
   ...fonts,
-  color: light
-}
+  color: light,
+};
 
 export const darkTheme: TypographyTheme = {
   ...fonts,
-  color: dark
-}
+  color: dark,
+};

@@ -1,10 +1,9 @@
 import React from "react";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 import styled from "styled-components";
-import { Button } from "../forms/Button";
 import { ErrorText } from "../forms/ErrorText";
 import { HelperText } from "../forms/HelperText";
-import { Input } from "../forms/Input";
+import { Input } from "../forms/Input/Input";
 import { Label } from "../forms/Label";
 import { Spacer } from "../Spacer";
 
@@ -77,8 +76,6 @@ export const SignupForm: React.FC<{}> = () => {
           </Label>
         </FormField>
       </FormFields>
-      <Spacer size={30} />
-      <Button>Sign Up</Button>
     </Container>
   );
 };

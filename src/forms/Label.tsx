@@ -1,21 +1,25 @@
-import * as React from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { TextCss } from "./TextCss";
 
 type LabelProps = {
   hasError?: boolean;
 };
 
-export const Label: React.FC<LabelProps> = ({ hasError, children }) => {
-  const className = hasError ? "has-error" : undefined;
-
-  return <LabelElement className={className}>{children}</LabelElement>;
-};
-
-const LabelElement = styled.label`
+export const Label = styled.label<LabelProps>`
   ${TextCss}
 
-  &.has-error {
-    color: ${(props) => props.theme.form.input.errorColor};
-  }
+  ${(props) => {
+    const {
+      hasError,
+      theme: {
+        form: {
+          input: { errorColor, textColor },
+        },
+      },
+    } = props;
+    const labelColor = hasError ? errorColor : textColor;
+    return css`
+      color: ${labelColor};
+    `;
+  }}
 `;
