@@ -1,3 +1,4 @@
+import { Breakpoints, MediaQueries } from "Media2Strings";
 import React from "react";
 import { render } from "react-dom";
 import { BrowserRouter as Router, Link, Route, Switch } from "react-router-dom";
@@ -56,6 +57,13 @@ const AppContainer = styled.div`
   background: ${(props) => props.theme.appBackgroundColor};
 `;
 
+const breakpoints: Breakpoints = {
+  tablet: 768,
+  desktop: 1280
+}
+
+const mediaQueries = new MediaQueries(breakpoints);
+
 const lightModeTheme = {
   appBackgroundColor: "#fff",
   form: {
@@ -64,6 +72,7 @@ const lightModeTheme = {
   },
   typography: typographyLightTheme,
   button: buttonLightTheme,
+  mediaQueries,
 };
 
 const darkModeTheme = {
@@ -74,6 +83,7 @@ const darkModeTheme = {
   },
   typography: typographyDarkTheme,
   button: buttonDarkTheme,
+  mediaQueries,
 };
 
 render(<App />, document.getElementById("root"));
