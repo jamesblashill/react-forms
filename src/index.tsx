@@ -2,7 +2,9 @@ import React from "react";
 import { render } from "react-dom";
 import { BrowserRouter as Router, Link, Route, Switch } from "react-router-dom";
 import styled, { ThemeProvider } from "styled-components";
-import { SignupForm } from "./examples/SignupForm";
+import { SignupForm } from "./examples/SignupForm/SignupForm";
+import { SignupFormFormik } from "./examples/SignupForm/SignupFormFormik";
+import { SignupFormReactFormHooks } from "./examples/SignupForm/SignUpFormReactFormHooks";
 import { TypographyExample } from "./examples/Typography";
 import {
   lightTheme as buttonLightTheme,
@@ -30,6 +32,12 @@ const App: React.FC<{}> = () => {
                 <Link to="/signup">SignupForm</Link>
               </li>
               <li>
+                <Link to="/signup-formik">SignupFormFormik</Link>
+              </li>
+              <li>
+                <Link to="/signup-react-form-hooks">SignupFormReactFormHooks</Link>
+              </li>
+              <li>
                 <Link to="/typography">Typography</Link>
               </li>
             </ul>
@@ -39,6 +47,12 @@ const App: React.FC<{}> = () => {
           <Switch>
             <Route path="/signup">
               <SignupForm />
+            </Route>
+            <Route path="/signup-formik">
+              <SignupFormFormik />
+            </Route>
+            <Route path="/signup-react-form-hooks">
+              <SignupFormReactFormHooks />
             </Route>
             <Route path="/typography">
               <TypographyExample />
