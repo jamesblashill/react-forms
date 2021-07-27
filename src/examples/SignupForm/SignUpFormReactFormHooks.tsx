@@ -19,7 +19,7 @@ interface ISignupFormInputs {
 export const SignupFormReactFormHooks: React.FC<{}> = () => {
   const [showPassword, setShowPassword] = React.useState(false);
 
-  const { register, handleSubmit, formState: { errors } } = useForm<ISignupFormInputs>({ reValidateMode: 'onBlur' });
+  const { register, handleSubmit, formState: { errors } } = useForm<ISignupFormInputs>({ reValidateMode: 'onBlur', mode: 'onBlur' });
 
   const onSubmit = React.useCallback((values) => {
     console.log("values", values);

@@ -5,6 +5,7 @@ import styled, { ThemeProvider } from "styled-components";
 import { SignupForm } from "./examples/SignupForm/SignupForm";
 import { SignupFormFormik } from "./examples/SignupForm/SignupFormFormik";
 import { SignupFormReactFormHooks } from "./examples/SignupForm/SignUpFormReactFormHooks";
+import { SignupReactFinalForm } from "./examples/SignupForm/SignupReactFinalForm";
 import { TypographyExample } from "./examples/Typography";
 import {
   lightTheme as buttonLightTheme,
@@ -18,6 +19,7 @@ import {
   lightTheme as typographyLightTheme,
   darkTheme as typographyDarkTheme,
 } from "./Typography/themes";
+
 
 const App: React.FC<{}> = () => {
   const [darkMode, setDarkMode] = React.useState(false);
@@ -38,6 +40,9 @@ const App: React.FC<{}> = () => {
                 <Link to="/signup-react-form-hooks">SignupFormReactFormHooks</Link>
               </li>
               <li>
+                <Link to="/signup-react-final-form">SignupFormReactFormHooks</Link>
+              </li>
+              <li>
                 <Link to="/typography">Typography</Link>
               </li>
             </ul>
@@ -53,6 +58,9 @@ const App: React.FC<{}> = () => {
             </Route>
             <Route path="/signup-react-form-hooks">
               <SignupFormReactFormHooks />
+            </Route>
+            <Route path="/signup-react-final-form">
+              <SignupReactFinalForm />
             </Route>
             <Route path="/typography">
               <TypographyExample />
