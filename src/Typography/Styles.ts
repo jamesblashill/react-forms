@@ -1,13 +1,13 @@
 import { StandardPropertiesHyphen } from "csstype";
 import styled, { DefaultTheme } from "styled-components";
 
-import { lightTheme } from "./themes";
+import { lightTheme } from "./Themes";
 import {
   TypographyVariant,
   TypographyProps,
   TypographyTags,
   TypographyVariants,
-} from "./types";
+} from "./Types";
 
 const variantTagMap: { [key in TypographyVariants]: TypographyTags } = {
   displayXL: "h1",
@@ -74,7 +74,7 @@ export const TypographyStyles = ({
       maxLines && maxLines > 0
         ? MaxLines(maxLines, _theme[_font][variant]["lineHeight"])
         : ""
-    };   
+    };
   `;
 };
 

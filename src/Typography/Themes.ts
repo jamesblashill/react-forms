@@ -1,4 +1,4 @@
-import { Color, TypographyTheme, TypographyVariant } from "./types";
+import { Color, TypographyTheme, TypographyVariant } from "./Types";
 
 const variantGenerator = (
   fontFamily: TypographyVariant["font-family"],

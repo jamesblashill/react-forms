@@ -7,7 +7,7 @@ export {
   Italic,
   Strikethrough,
   Variant,
-} from "./styles";
+} from "./Styles";
 export {
   TypographyVariant,
   TypographyVariants,
@@ -15,5 +15,5 @@ export {
   TypographyTheme,
   Font,
   TypographyProps,
-} from "./types";
-export { lightTheme, darkTheme } from "./themes";
+} from "./Types";
+export { lightTheme, darkTheme } from "./Themes";

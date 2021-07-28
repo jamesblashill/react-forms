@@ -41,7 +41,7 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(({
 
   return (
     <>
-      <Label hasError={!!error} htmlFor={inputId}>{label}</Label>
+      {label && <Label hasError={!!error} htmlFor={inputId}>{label}</Label>}
       <InputContainer
         error={!!error}
         disabled={inputElementProps.disabled}
