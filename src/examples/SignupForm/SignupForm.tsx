@@ -7,7 +7,7 @@ import { Label } from "../../forms/Label";
 import { unboxFormEventValue } from "../../forms/unboxFormEventValue";
 import { Spacer } from "../../Spacer";
 import { Container, FormField, FormFields, ToggleShowPasswordButton } from "./common";
-import { Dropzone } from '../forms/Dropzone';
+import { Dropzone } from '../../forms/Dropzone';
 import { IDocument } from "@faire/web-api/indigofair/data/IDocument";
 
 export const SignupForm: React.FC<{}> = () => {
