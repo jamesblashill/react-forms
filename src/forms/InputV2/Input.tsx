@@ -5,8 +5,8 @@ import { Spacer } from "../../Spacer";
 import { InputContainer } from "./styles";
 import { InputProps } from "./types";
 import { Typography } from "../../Typography";
-import { Label } from "forms/Label";
-import { ErrorText } from "forms/ErrorText";
+import { Label } from "../Label";
+import { ErrorText } from "../ErrorText";
 
 function useCombinedRefs<T>(...refs: (React.ForwardedRef<T> | React.RefObject<T>)[]) {
   const targetRef = React.useRef<T>(null)
