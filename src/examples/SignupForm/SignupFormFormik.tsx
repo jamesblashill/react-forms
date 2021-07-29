@@ -8,6 +8,7 @@ import { Label } from "../../forms/Label";
 import { Spacer } from "../../Spacer";
 import { Row } from "../../Layout";
 import { Container, FormField, FormFields, ToggleShowPasswordButton } from "./common";
+import { Checkbox } from "../../forms/Checkbox";
 // import { Dropzone } from '../../forms/Dropzone';
 // import { IDocument } from "@faire/web-api/indigofair/data/IDocument";
 
@@ -118,10 +119,7 @@ export const SignupFormFormik: React.FC<{ onSubmit: (values: ISignUpFormValues) 
               </FormField>
               {values.email && !errors.email && (
                 <FormField name="allowedSpam">
-                  <Row>
-                    <input type="checkbox" id="allowedSpam" onChange={handleChange} name="allowedSpam" />
-                    <Label htmlFor="allowedSpam">Allow us to send you da spams</Label>
-                  </Row>
+                  <Checkbox label="Allow us to send you da spam." id="allowedSpam" name="allowedSpam" />
                 </FormField>
               )}
               <FormField name="phone">

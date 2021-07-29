@@ -11,6 +11,7 @@ import {
   lightTheme as typographyLightTheme,
   darkTheme as typographyDarkTheme,
 } from "./Typography/Themes";
+import { checkboxDarkTheme, checkboxLightTheme } from "./forms/Checkbox";
 
 const breakpoints: Breakpoints = {
   tablet: 768,
@@ -27,6 +28,7 @@ export const lightModeTheme = {
   },
   typography: typographyLightTheme,
   button: buttonLightTheme,
+  checkbox: checkboxLightTheme,
   mediaQueries,
 };
 
@@ -38,5 +40,6 @@ export const darkModeTheme = {
   },
   typography: typographyDarkTheme,
   button: buttonDarkTheme,
+  checkbox: checkboxDarkTheme,
   mediaQueries,
 };
