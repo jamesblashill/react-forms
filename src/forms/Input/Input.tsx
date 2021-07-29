@@ -4,28 +4,47 @@ import { Spacer } from "../../Spacer";
 import { InputContainer } from "./styles";
 import { InputProps } from "./types";
 
-export const Input: React.FC<InputProps> = ({
+function useCombinedRefs<T>(...refs: (React.ForwardedRef<T> | React.RefObject<T>)[]) {
+  const targetRef = React.useRef<T>(null)
+
+  React.useEffect(() => {
+    refs.forEach(ref => {
+      if (!ref) return
+
+      if (typeof ref === 'function') {
+        ref(targetRef?.current)
+      } else {
+        (ref as React.MutableRefObject<T | null>).current = targetRef.current
+      }
+    })
+  }, [refs])
+
+  return targetRef
+}
+
+export const Input = React.forwardRef<HTMLInputElement, InputProps>(({
   hasError,
   prefixNode,
   suffixNode,
   ...inputElementProps
-}) => {
+}, ref) => {
   const inputRef = React.useRef<HTMLInputElement>(null);
+  const combinedRef = useCombinedRefs<HTMLInputElement>(ref, inputRef);
   const classNames = computeInputClasses(hasError, inputElementProps.disabled);
 
   return (
     <InputContainer
       className={classNames}
       onClick={() => {
-        inputRef.current?.focus();
+        combinedRef.current?.focus();
       }}
     >
       {prefixNode ?? <Spacer size={16} />}
-      <input ref={inputRef} {...inputElementProps} />
+      <input ref={combinedRef} {...inputElementProps} />
       {suffixNode ?? <Spacer size={16} />}
     </InputContainer>
   );
-};
+});
 
 const computeInputClasses = (
   hasError: boolean = false,
