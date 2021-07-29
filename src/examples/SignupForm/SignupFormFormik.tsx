@@ -1,3 +1,4 @@
+import { IDocument } from "@faire/web-api/indigofair/data/IDocument";
 import { Formik } from "formik";
 import * as React from "react";
 import { useCallback } from "react";
@@ -8,18 +9,17 @@ import { Label } from "../../forms/Label";
 import { Spacer } from "../../Spacer";
 import { Row } from "../../Layout";
 import { Container, FormField, FormFields, ToggleShowPasswordButton } from "./common";
+import { Dropzone } from '../../forms/Dropzone';
 import { Checkbox } from "../../forms/Checkbox";
-// import { Dropzone } from '../../forms/Dropzone';
-// import { IDocument } from "@faire/web-api/indigofair/data/IDocument";
 
 const phoneRegex = /^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}$/;
 
-// const DocumentSchema: Yup.SchemaOf<IDocument> = Yup.object({
-//   created_at: Yup.number().defined(),
-//   file_name: Yup.string().defined(),
-//   token: Yup.string().defined(),
-//   url: Yup.string().defined(),
-// });
+const DocumentSchema: Yup.SchemaOf<IDocument> = Yup.object({
+  created_at: Yup.number().defined(),
+  file_name: Yup.string().defined(),
+  token: Yup.string().defined(),
+  url: Yup.string().defined(),
+});
 
 const SignUpSchema = Yup.object().shape({
   first: Yup
@@ -41,7 +41,7 @@ const SignUpSchema = Yup.object().shape({
     .string()
     .min(4, "Password must be more than 4 characters")
     .defined("Please enter a password"),
-  // files: Yup.array().of(DocumentSchema),
+  files: Yup.array().of(DocumentSchema),
 });
 
 export interface ISignUpFormValues extends Yup.TypeOf<typeof SignUpSchema> {}
@@ -69,7 +69,7 @@ export const SignupFormFormik: React.FC<{ onSubmit: (values: ISignUpFormValues) 
       validationSchema={SignUpSchema}
       onSubmit={handleSubmit}
     >
-      {({ values, errors, touched, handleChange, handleBlur, submitForm }) => {
+      {({ values, errors, touched, handleChange, handleBlur, submitForm, setFieldValue }) => {
         const showAllowedSpam = values.email && !errors.email;
         const formLayoutTemplate = [
           "firstName lastName",
@@ -150,12 +150,12 @@ export const SignupFormFormik: React.FC<{ onSubmit: (values: ISignUpFormValues) 
                   type={showPassword ? "text" : "password"}
                 />
               </FormField>
-              {/* <FormField name="files">
+              <FormField name="files">
                 <Dropzone
-                  onChange={onChange}
-                  files={values.files}
+                  onChange={values => setFieldValue('files', values)}
+                  files={values.files as IDocument[]}
                 />
-              </FormField> */}
+              </FormField>
             </FormFields>
             <Spacer size={30} />
             <Button type="submit" onClick={submitForm}>Sign Up</Button>
