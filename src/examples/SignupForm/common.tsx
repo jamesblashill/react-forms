@@ -8,14 +8,9 @@ export const Container = styled.div`
   width: 500px;
 `;
 
-export const FormFields = styled.div`
+export const FormFields = styled.div<{ template: string[] }>`
   display: grid;
-  grid-template-areas:
-    "firstName lastName"
-    "email email"
-    "phone phone"
-    "password password"
-    "files files";
+  grid-template-areas: "${(props) => props.template.join('"\n"')}";
   grid-gap: 30px 10px;
 `;
 

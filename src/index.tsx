@@ -3,27 +3,19 @@ import React from "react";
 import { render } from "react-dom";
 import { BrowserRouter as Router, Link, Route, Switch } from "react-router-dom";
 import styled, { ThemeProvider } from "styled-components";
+import { darkModeTheme, lightModeTheme } from "./theme";
 import { SignupForm } from "./examples/SignupForm/SignupForm";
-import { SignupFormFormik } from "./examples/SignupForm/SignupFormFormik";
+import { ISignUpFormValues, SignupFormFormik } from "./examples/SignupForm/SignupFormFormik";
 import { SignupFormReactFormHooks } from "./examples/SignupForm/SignUpFormReactFormHooks";
 import { SignupReactFinalForm } from "./examples/SignupForm/SignupReactFinalForm";
 import { TypographyExample } from "./examples/Typography";
-import {
-  lightTheme as buttonLightTheme,
-  darkTheme as buttonDarkTheme,
-} from "./forms/Button";
-import {
-  lightTheme as inputLightTheme,
-  darkTheme as inputDarkTheme,
-} from "./forms/Input";
-import {
-  lightTheme as typographyLightTheme,
-  darkTheme as typographyDarkTheme,
-} from "./Typography/themes";
-
 
 const App: React.FC<{}> = () => {
   const [darkMode, setDarkMode] = React.useState(false);
+
+  const onSubmit = (values: ISignUpFormValues) => {
+    console.log("Formik form submit", values);
+  }
 
   return (
     <ThemeProvider theme={darkMode ? darkModeTheme : lightModeTheme}>
@@ -55,7 +47,7 @@ const App: React.FC<{}> = () => {
               <SignupForm />
             </Route>
             <Route path="/signup-formik">
-              <SignupFormFormik />
+              <SignupFormFormik onSubmit={onSubmit} />
             </Route>
             <Route path="/signup-react-form-hooks">
               <SignupFormReactFormHooks />
@@ -78,34 +70,5 @@ const AppContainer = styled.div`
   width: 100%;
   background: ${(props) => props.theme.appBackgroundColor};
 `;
-
-const breakpoints: Breakpoints = {
-  tablet: 768,
-  desktop: 1280
-}
-
-const mediaQueries = new MediaQueries(breakpoints);
-
-const lightModeTheme = {
-  appBackgroundColor: "#fff",
-  form: {
-    textColor: "#333",
-    input: inputLightTheme,
-  },
-  typography: typographyLightTheme,
-  button: buttonLightTheme,
-  mediaQueries,
-};
-
-const darkModeTheme = {
-  appBackgroundColor: "#333",
-  form: {
-    textColor: "#eee",
-    input: inputDarkTheme,
-  },
-  typography: typographyDarkTheme,
-  button: buttonDarkTheme,
-  mediaQueries,
-};
 
 render(<App />, document.getElementById("root"));

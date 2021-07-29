@@ -3,13 +3,22 @@ import * as React from "react";
 import { useCallback } from "react";
 import * as Yup from "yup";
 import { Button } from "../../forms/Button";
-import { ErrorText } from "../../forms/ErrorText";
 import { Input } from "../../forms/InputV2";
 import { Label } from "../../forms/Label";
 import { Spacer } from "../../Spacer";
+import { Row } from "../../Layout";
 import { Container, FormField, FormFields, ToggleShowPasswordButton } from "./common";
+// import { Dropzone } from '../../forms/Dropzone';
+// import { IDocument } from "@faire/web-api/indigofair/data/IDocument";
 
 const phoneRegex = /^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}$/;
+
+// const DocumentSchema: Yup.SchemaOf<IDocument> = Yup.object({
+//   created_at: Yup.number().defined(),
+//   file_name: Yup.string().defined(),
+//   token: Yup.string().defined(),
+//   url: Yup.string().defined(),
+// });
 
 const SignUpSchema = Yup.object().shape({
   first: Yup
@@ -21,7 +30,8 @@ const SignUpSchema = Yup.object().shape({
   email: Yup
     .string()
     .email()
-    .defined("Please enter a email"),
+    .defined("Please enter an email"),
+  allowedSpam: Yup.boolean(),
   phone: Yup
     .string()
     .matches(phoneRegex, 'Please enter a valid phone number!')
@@ -30,9 +40,10 @@ const SignUpSchema = Yup.object().shape({
     .string()
     .min(4, "Password must be more than 4 characters")
     .defined("Please enter a password"),
+  // files: Yup.array().of(DocumentSchema),
 });
 
-interface ISignUpFormValues extends Yup.TypeOf<typeof SignUpSchema> {}
+export interface ISignUpFormValues extends Yup.TypeOf<typeof SignUpSchema> {}
 
 const SignUpInitial: ISignUpFormValues = SignUpSchema.cast({
   first: "",
@@ -40,14 +51,16 @@ const SignUpInitial: ISignUpFormValues = SignUpSchema.cast({
   email: "",
   phone: "",
   password: "",
-})
+  allowedSpam: false,
+});
 
-export const SignupFormFormik: React.FC<{}> = () => {
+export const SignupFormFormik: React.FC<{ onSubmit: (values: ISignUpFormValues) => void }> = (props) => {
+  const { onSubmit } = props;
   const [showPassword, setShowPassword] = React.useState(false);
 
   const handleSubmit = useCallback((values: ISignUpFormValues) => {
-    console.log("values", values);
-  }, []);
+    onSubmit(values);
+  }, [onSubmit]);
 
   return (
     <Formik
@@ -55,69 +68,77 @@ export const SignupFormFormik: React.FC<{}> = () => {
       validationSchema={SignUpSchema}
       onSubmit={handleSubmit}
     >
-      {({ values, errors, touched, handleChange, handleBlur, submitForm }) => (
-        <Container>
-          <FormFields>
-            <FormField name="firstName">
-              <Input
-                name="first"
-                label="First Name"
-                helper="This is your given name"
-                error={touched.first ? errors.first : false}
-                onChange={handleChange}
-                onBlur={handleBlur}
-                value={values.first}
-                placeholder="Enter your first name"
-              />
-            </FormField>
-            <FormField name="lastName">
-              <Label hasError={!!errors.last && touched.last}>
-                Last Name
+      {({ values, errors, touched, handleChange, handleBlur, submitForm }) => {
+        const showAllowedSpam = values.email && !errors.email;
+        const formLayoutTemplate = [
+          "firstName lastName",
+          "email email",
+          ...(showAllowedSpam ? ["allowedSpam allowedSpam"] : []),
+          "phone phone",
+          "password password",
+          "files files",
+        ];
+        return (
+          <Container>
+            <FormFields template={formLayoutTemplate}>
+              <FormField name="firstName">
+                <Input
+                  name="first"
+                  label="First Name"
+                  helper="This is your given name"
+                  error={touched.first ? errors.first : false}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  value={values.first}
+                  placeholder="Enter your first name"
+                />
+              </FormField>
+              <FormField name="lastName">
                 <Input
                   name="last"
+                  label="Last Name"
                   onChange={handleChange}
                   onBlur={handleBlur}
                   value={values.last}
                   placeholder="Enter your last name"
-                  error={!!errors.last && touched.last}
+                  error={touched.last && errors.last}
                 />
-                {errors.last && touched.last && <ErrorText>{errors.last}</ErrorText>}
-              </Label>
-            </FormField>
-            <FormField name="email">
-              <Label hasError={!!errors.email && touched.email}>
-                Email
+              </FormField>
+              <FormField name="email">
                 <Input
                   name="email"
                   type="email"
+                  label="Email"
                   onChange={handleChange}
                   onBlur={handleBlur}
                   value={values.email}
                   placeholder="your.name@example.com"
-                  error={!!errors.email && touched.email}
+                  error={touched.email && errors.email}
                 />
-                {errors.email && touched.email && <ErrorText>{errors.email}</ErrorText>}
-              </Label>
-            </FormField>
-            <FormField name="phone">
-              <Label hasError={!!errors.phone && touched.phone}>
-                Phone
+              </FormField>
+              {values.email && !errors.email && (
+                <FormField name="allowedSpam">
+                  <Row>
+                    <input type="checkbox" id="allowedSpam" onChange={handleChange} name="allowedSpam" />
+                    <Label htmlFor="allowedSpam">Allow us to send you da spams</Label>
+                  </Row>
+                </FormField>
+              )}
+              <FormField name="phone">
                 <Input
                   name="phone"
+                  label="Phone"
                   onChange={handleChange}
                   onBlur={handleBlur}
                   value={values.phone}
                   placeholder="226066343"
-                  error={!!errors.phone && touched.phone}
+                  error={touched.phone && errors.phone}
                 />
-                {errors.phone && touched.phone && <ErrorText>{errors.phone}</ErrorText>}
-              </Label>
-            </FormField>
-            <FormField name="password">
-              <Label hasError={!!errors.password && touched.password}>
-                Password
+              </FormField>
+              <FormField name="password">
                 <Input
                   name="password"
+                  label="Password"
                   onChange={handleChange}
                   onBlur={handleBlur}
                   value={values.password}
@@ -127,19 +148,22 @@ export const SignupFormFormik: React.FC<{}> = () => {
                       onClick={() => setShowPassword(!showPassword)}
                     />
                   }
-                  error={!!errors.password && touched.password}
+                  error={touched.password && errors.password}
                   type={showPassword ? "text" : "password"}
                 />
-                {errors.password && touched.password && <ErrorText>{errors.password}</ErrorText>}
-              </Label>
-            </FormField>
-          </FormFields>
-          <Spacer size={30} />
-          <Button type="submit" onClick={submitForm}>Sign Up</Button>
-        </Container>
-      )}
+              </FormField>
+              {/* <FormField name="files">
+                <Dropzone
+                  onChange={onChange}
+                  files={values.files}
+                />
+              </FormField> */}
+            </FormFields>
+            <Spacer size={30} />
+            <Button type="submit" onClick={submitForm}>Sign Up</Button>
+          </Container>
+        );
+      }}
     </Formik>
   );
 };
-
-
