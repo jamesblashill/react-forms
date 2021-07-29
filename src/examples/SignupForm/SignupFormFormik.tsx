@@ -4,8 +4,7 @@ import { useCallback } from "react";
 import * as Yup from "yup";
 import { Button } from "../../forms/Button";
 import { ErrorText } from "../../forms/ErrorText";
-import { HelperText } from "../../forms/HelperText";
-import { Input } from "../../forms/Input";
+import { Input } from "../../forms/InputV2";
 import { Label } from "../../forms/Label";
 import { Spacer } from "../../Spacer";
 import { Container, FormField, FormFields, ToggleShowPasswordButton } from "./common";
@@ -60,19 +59,16 @@ export const SignupFormFormik: React.FC<{}> = () => {
         <Container>
           <FormFields>
             <FormField name="firstName">
-              <Label hasError={!!errors.first && touched.first}>
-                First Name
-                <Input
-                  name="first"
-                  onChange={handleChange}
-                  onBlur={handleBlur}
-                  value={values.first}
-                  placeholder="Enter your first name"
-                  hasError={!!errors.first && touched.first}
-                />
-                {errors.first && touched.first && <ErrorText>{errors.first}</ErrorText>}
-                {!errors.first && !touched.first && <HelperText>This is your given name</HelperText>}
-              </Label>
+              <Input
+                name="first"
+                label="First Name"
+                helper="This is your given name"
+                error={touched.first ? errors.first : false}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                value={values.first}
+                placeholder="Enter your first name"
+              />
             </FormField>
             <FormField name="lastName">
               <Label hasError={!!errors.last && touched.last}>
@@ -83,7 +79,7 @@ export const SignupFormFormik: React.FC<{}> = () => {
                   onBlur={handleBlur}
                   value={values.last}
                   placeholder="Enter your last name"
-                  hasError={!!errors.last && touched.last}
+                  error={!!errors.last && touched.last}
                 />
                 {errors.last && touched.last && <ErrorText>{errors.last}</ErrorText>}
               </Label>
@@ -98,7 +94,7 @@ export const SignupFormFormik: React.FC<{}> = () => {
                   onBlur={handleBlur}
                   value={values.email}
                   placeholder="your.name@example.com"
-                  hasError={!!errors.email && touched.email}
+                  error={!!errors.email && touched.email}
                 />
                 {errors.email && touched.email && <ErrorText>{errors.email}</ErrorText>}
               </Label>
@@ -112,7 +108,7 @@ export const SignupFormFormik: React.FC<{}> = () => {
                   onBlur={handleBlur}
                   value={values.phone}
                   placeholder="226066343"
-                  hasError={!!errors.phone && touched.phone}
+                  error={!!errors.phone && touched.phone}
                 />
                 {errors.phone && touched.phone && <ErrorText>{errors.phone}</ErrorText>}
               </Label>
@@ -131,7 +127,7 @@ export const SignupFormFormik: React.FC<{}> = () => {
                       onClick={() => setShowPassword(!showPassword)}
                     />
                   }
-                  hasError={!!errors.password && touched.password}
+                  error={!!errors.password && touched.password}
                   type={showPassword ? "text" : "password"}
                 />
                 {errors.password && touched.password && <ErrorText>{errors.password}</ErrorText>}

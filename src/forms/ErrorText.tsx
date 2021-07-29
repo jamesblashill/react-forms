@@ -1,7 +1,6 @@
 import styled from "styled-components";
+import { Typography } from "Typography";
 
-import { HelperText } from "./HelperText";
-
-export const ErrorText = styled(HelperText)`
+export const ErrorText = styled(Typography).attrs({ variant: 'label' })`
   color: ${(props) => props.theme.form.input.errorColor};
 `;
