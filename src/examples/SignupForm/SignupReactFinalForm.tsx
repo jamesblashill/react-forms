@@ -24,6 +24,13 @@ const intialValues: ISignupFormInputs = {
   password: "",
 };
 
+const formLayoutTemplate = [
+  "firstName lastName",
+  "email email",
+  "phone phone",
+  "password password",
+];
+
 export const SignupReactFinalForm: React.FC<{}> = () => {
   const [showPassword, setShowPassword] = React.useState(false);
 
@@ -38,7 +45,7 @@ export const SignupReactFinalForm: React.FC<{}> = () => {
         onSubmit={onSubmit}
       >
         {() => (
-          <FormFields>
+          <FormFields template={formLayoutTemplate}>
             <FormField name="firstName">
               <Field name="first">
                 {({ input, meta }) => (

@@ -16,6 +16,13 @@ interface ISignupFormInputs {
   password: string,
 }
 
+const formLayoutTemplate = [
+  "firstName lastName",
+  "email email",
+  "phone phone",
+  "password password",
+];
+
 export const SignupFormReactFormHooks: React.FC<{}> = () => {
   const [showPassword, setShowPassword] = React.useState(false);
 
@@ -29,7 +36,7 @@ export const SignupFormReactFormHooks: React.FC<{}> = () => {
 
   return (
     <Container>
-      <FormFields>
+      <FormFields template={formLayoutTemplate}>
         <FormField name="firstName">
           <Label hasError={!!errors.first?.message}>
             First Name
