@@ -10,6 +10,14 @@ import { Container, FormField, FormFields, ToggleShowPasswordButton } from "./co
 import { Dropzone } from '../../forms/Dropzone';
 import { IDocument } from "@faire/web-api/indigofair/data/IDocument";
 
+const formLayoutTemplate = [
+  "firstName lastName",
+  "email email",
+  "phone phone",
+  "password password",
+  "files files"
+];
+
 export const SignupForm: React.FC<{}> = () => {
   const [first, setFirst] = React.useState("");
   const [last, setLast] = React.useState("");
@@ -23,7 +31,7 @@ export const SignupForm: React.FC<{}> = () => {
 
   return (
     <Container>
-      <FormFields>
+      <FormFields template={formLayoutTemplate}>
         <FormField name="firstName">
           <Label>
             First Name
