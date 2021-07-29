@@ -7,6 +7,8 @@ import { Label } from "../../forms/Label";
 import { unboxFormEventValue } from "../../forms/unboxFormEventValue";
 import { Spacer } from "../../Spacer";
 import { Container, FormField, FormFields, ToggleShowPasswordButton } from "./common";
+import { Dropzone } from '../../forms/Dropzone';
+import { IDocument } from "@faire/web-api/indigofair/data/IDocument";
 
 export const SignupForm: React.FC<{}> = () => {
   const [first, setFirst] = React.useState("");
@@ -14,6 +16,7 @@ export const SignupForm: React.FC<{}> = () => {
   const [email, setEmail] = React.useState("");
   const [phone, setPhone] = React.useState("");
   const [password, setPassword] = React.useState("");
+  const [files, setFiles] = React.useState<IDocument[]>([]);
   const [showPassword, setShowPassword] = React.useState(false);
 
   const lastInvalid = last.length < 4;
@@ -79,6 +82,12 @@ export const SignupForm: React.FC<{}> = () => {
               type={showPassword ? "text" : "password"}
             />
           </Label>
+        </FormField>
+        <FormField name="files">
+            <Dropzone
+              onChange={setFiles}
+              files={files}
+            />
         </FormField>
       </FormFields>
       <Spacer size={30} />

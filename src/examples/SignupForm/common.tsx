@@ -14,7 +14,8 @@ export const FormFields = styled.div`
     "firstName lastName"
     "email email"
     "phone phone"
-    "password password";
+    "password password"
+    "files files";
   grid-gap: 30px 10px;
 `;
 
