@@ -1,4 +1,3 @@
-// import { Label } from "forms/Label";
 import * as React from "react";
 import uniqueId from 'lodash/uniqueId';
 
@@ -7,7 +6,6 @@ import { InputContainer } from "./styles";
 import { InputProps } from "./types";
 import { Typography } from "../../Typography";
 import { Label } from "forms/Label";
-import { HelperText } from "forms/HelperText";
 import { ErrorText } from "forms/ErrorText";
 
 function useCombinedRefs<T>(...refs: (React.ForwardedRef<T> | React.RefObject<T>)[]) {
