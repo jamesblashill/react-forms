@@ -1,26 +1,9 @@
 import * as React from "react";
 
+import { useCombinedRefs } from "../UseCombinedRefs";
 import { Spacer } from "../../Spacer";
 import { InputContainer } from "./styles";
 import { InputProps } from "./types";
-
-function useCombinedRefs<T>(...refs: (React.ForwardedRef<T> | React.RefObject<T>)[]) {
-  const targetRef = React.useRef<T>(null)
-
-  React.useEffect(() => {
-    refs.forEach(ref => {
-      if (!ref) return
-
-      if (typeof ref === 'function') {
-        ref(targetRef?.current)
-      } else {
-        (ref as React.MutableRefObject<T | null>).current = targetRef.current
-      }
-    })
-  }, [refs])
-
-  return targetRef
-}
 
 export const Input = React.forwardRef<HTMLInputElement, InputProps>(({
   hasError,

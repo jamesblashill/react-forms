@@ -1,3 +1,4 @@
+import { IDocument } from "@faire/web-api/indigofair/data/IDocument";
 import { Formik } from "formik";
 import * as React from "react";
 import { useCallback } from "react";
@@ -9,7 +10,7 @@ import { Spacer } from "../../Spacer";
 import { Row } from "../../Layout";
 import { Container, FormField, FormFields, ToggleShowPasswordButton } from "./common";
 import { Dropzone } from '../../forms/Dropzone';
-import { IDocument } from "@faire/web-api/indigofair/data/IDocument";
+import { Checkbox } from "../../forms/Checkbox";
 
 const phoneRegex = /^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}$/;
 
@@ -118,10 +119,7 @@ export const SignupFormFormik: React.FC<{ onSubmit: (values: ISignUpFormValues) 
               </FormField>
               {values.email && !errors.email && (
                 <FormField name="allowedSpam">
-                  <Row>
-                    <input type="checkbox" id="allowedSpam" onChange={handleChange} name="allowedSpam" />
-                    <Label htmlFor="allowedSpam">Allow us to send you da spams</Label>
-                  </Row>
+                  <Checkbox label="Allow us to send you da spam." id="allowedSpam" name="allowedSpam" />
                 </FormField>
               )}
               <FormField name="phone">

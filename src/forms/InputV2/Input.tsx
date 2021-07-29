@@ -7,24 +7,7 @@ import { InputProps } from "./types";
 import { Typography } from "../../Typography";
 import { Label } from "../Label";
 import { ErrorText } from "../ErrorText";
-
-function useCombinedRefs<T>(...refs: (React.ForwardedRef<T> | React.RefObject<T>)[]) {
-  const targetRef = React.useRef<T>(null)
-
-  React.useEffect(() => {
-    refs.forEach(ref => {
-      if (!ref) return
-
-      if (typeof ref === 'function') {
-        ref(targetRef?.current)
-      } else {
-        (ref as React.MutableRefObject<T | null>).current = targetRef.current
-      }
-    })
-  }, [refs])
-
-  return targetRef
-}
+import { useCombinedRefs } from "../UseCombinedRefs";
 
 export const Input = React.forwardRef<HTMLInputElement, InputProps>(({
   error,
