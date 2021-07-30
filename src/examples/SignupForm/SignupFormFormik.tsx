@@ -1,14 +1,12 @@
 import { IDocument } from "@faire/web-api/indigofair/data/IDocument";
-import { Formik } from "formik";
+import { Form, Formik } from "formik";
 import * as React from "react";
-import { useCallback } from "react";
+import styled from "styled-components";
 import * as Yup from "yup";
+import { FormField, FormFields, ToggleShowPasswordButton } from "./common";
 import { Button } from "../../forms/Button";
 import { Input } from "../../forms/InputV2";
-import { Label } from "../../forms/Label";
 import { Spacer } from "../../Spacer";
-import { Row } from "../../Layout";
-import { Container, FormField, FormFields, ToggleShowPasswordButton } from "./common";
 import { Dropzone } from '../../forms/Dropzone';
 import { Checkbox } from "../../forms/Checkbox";
 
@@ -50,16 +48,17 @@ const SignUpInitial: ISignUpFormValues = SignUpSchema.cast({
   first: "",
   last: "",
   email: "",
+  allowedSpam: false,
   phone: "",
   password: "",
-  allowedSpam: false,
+  files: [],
 });
 
 export const SignupFormFormik: React.FC<{ onSubmit: (values: ISignUpFormValues) => void }> = (props) => {
   const { onSubmit } = props;
   const [showPassword, setShowPassword] = React.useState(false);
 
-  const handleSubmit = useCallback((values: ISignUpFormValues) => {
+  const handleSubmit = React.useCallback((values: ISignUpFormValues) => {
     onSubmit(values);
   }, [onSubmit]);
 
@@ -69,7 +68,7 @@ export const SignupFormFormik: React.FC<{ onSubmit: (values: ISignUpFormValues) 
       validationSchema={SignUpSchema}
       onSubmit={handleSubmit}
     >
-      {({ values, errors, touched, handleChange, handleBlur, submitForm, setFieldValue }) => {
+      {({ values, errors, touched, handleChange, handleBlur, setFieldValue }) => {
         const showAllowedSpam = values.email && !errors.email;
         const formLayoutTemplate = [
           "firstName lastName",
@@ -80,7 +79,7 @@ export const SignupFormFormik: React.FC<{ onSubmit: (values: ISignUpFormValues) 
           "files files",
         ];
         return (
-          <Container>
+          <FormContainer>
             <FormFields template={formLayoutTemplate}>
               <FormField name="firstName">
                 <Input
@@ -119,7 +118,12 @@ export const SignupFormFormik: React.FC<{ onSubmit: (values: ISignUpFormValues) 
               </FormField>
               {values.email && !errors.email && (
                 <FormField name="allowedSpam">
-                  <Checkbox label="Allow us to send you da spam." id="allowedSpam" name="allowedSpam" />
+                  <Checkbox
+                    name="allowedSpam"
+                    label="Allow us to send you da spam."
+                    onBlur={handleBlur}
+                    onChange={handleChange}
+                  />
                 </FormField>
               )}
               <FormField name="phone">
@@ -158,10 +162,15 @@ export const SignupFormFormik: React.FC<{ onSubmit: (values: ISignUpFormValues) 
               </FormField>
             </FormFields>
             <Spacer size={30} />
-            <Button type="submit" onClick={submitForm}>Sign Up</Button>
-          </Container>
+            <Button type="submit">Sign Up</Button>
+          </FormContainer>
         );
       }}
     </Formik>
   );
 };
+
+const FormContainer = styled(Form)`
+  margin: 30px auto;
+  width: 500px;
+`;

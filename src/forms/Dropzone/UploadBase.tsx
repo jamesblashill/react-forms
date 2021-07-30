@@ -4,7 +4,11 @@ import { generate } from "shortid";
 
 const defaultClassName = generate();
 
-export const UploadBase: React.FunctionComponent<DropzoneProps> = (props) => {
+interface IUploadBase extends DropzoneProps {
+  hasError: boolean;
+}
+
+export const UploadBase: React.FunctionComponent<IUploadBase> = ({ hasError, ...props}) => {
   const childProps = {
     className: defaultClassName,
     ...props,

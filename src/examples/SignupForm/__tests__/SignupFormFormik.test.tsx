@@ -52,7 +52,7 @@ describe("SignUp form testing (Formik)", () => {
   it("Should render allowedSpam checkbox if valid email", async () => {
     expect(screen.queryByLabelText("Allow us to send you da spams")).not.toBeInTheDocument();
     typeInFormField("Email", "test@gmail.com");
-    await waitFor(() => expectFieldToBeInDocument("Allow us to send you da spams"));
+    await waitFor(() => expectFieldToBeInDocument("Allow us to send you da spam."));
   });
 
   it("Submits when all fields are filled", async () => {
@@ -63,6 +63,7 @@ describe("SignUp form testing (Formik)", () => {
       phone: "519-500-8912",
       password: "password",
       allowedSpam: true,
+      files: [],
     };
 
     typeInFormField("First Name", values.first);
@@ -70,7 +71,7 @@ describe("SignUp form testing (Formik)", () => {
     typeInFormField("Email", values.email);
     typeInFormField("Phone", values.phone);
     typeInFormField("Password", values.password);
-    userEvent.click(screen.getByLabelText("Allow us to send you da spams"))
+    userEvent.click(screen.getByLabelText("Allow us to send you da spam."));
     userEvent.click(screen.getByRole("button", { name: "Sign Up"}));
 
     await waitFor(() => expect(mockOnsubmit).toBeCalledWith(values));
