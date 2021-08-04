@@ -16,9 +16,9 @@ export type TypographyVariants =
   | "labelSansRegular";
 
 export type ResponsiveTypographyVariants = {
-  mobile: TypographyVariants;
-  tablet?: TypographyVariants;
-  desktop?: TypographyVariants;
+  mobileAndAbove: TypographyVariants;
+  tabletAndAbove?: TypographyVariants;
+  desktopAndAbove?: TypographyVariants;
 }
 
 export type TypographyTags = "h1" | "h2" | "h3" | "h4" | "h5" | "p" | "span" | "label";
