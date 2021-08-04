@@ -66,21 +66,21 @@ export const TypographyStyles = ({
     margin: 0;
     padding: 0;
     color: ${_theme["color"][color]};
-    ${Variant(_theme["font"][_variant])};
+    ${Variant(_theme["fonts"][_variant])};
     ${align ? Align(align) : ""};
     ${truncate ? Truncate : ""};
     ${
       maxLines && maxLines > 0
-        ? MaxLines(maxLines, _theme["font"][_variant]["lineHeight"])
+        ? MaxLines(maxLines, _theme["fonts"][_variant]["lineHeight"])
         : ""
     };
 
     @media only screen and (min-width: 768px) {
-      ${typeof variant === "object" && variant.tablet ? Variant(_theme["font"][variant.tablet]) : ""}
+      ${typeof variant === "object" && variant.tablet ? Variant(_theme["fonts"][variant.tablet]) : ""}
     }
 
     @media only screen and (min-width: 1280px) {
-      ${typeof variant === "object" && variant.desktop ? Variant(_theme["font"][variant.desktop]) : ""}
+      ${typeof variant === "object" && variant.desktop ? Variant(_theme["fonts"][variant.desktop]) : ""}
     }
   `;
 };
