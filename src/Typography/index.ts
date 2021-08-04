@@ -4,8 +4,6 @@ export {
   Truncate,
   MaxLines,
   Align,
-  Italic,
-  Strikethrough,
   Variant,
 } from "./Styles";
 export {
@@ -13,7 +11,6 @@ export {
   TypographyVariants,
   TypographyTags,
   TypographyTheme,
-  Font,
   TypographyProps,
 } from "./Types";
 export { lightTheme, darkTheme } from "./Themes";

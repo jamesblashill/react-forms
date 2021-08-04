@@ -10,13 +10,19 @@ import {
 } from "./Types";
 
 const variantTagMap: { [key in TypographyVariants]: TypographyTags } = {
-  displayXL: "h1",
-  displayL: "h2",
-  displayM: "h3",
-  displayS: "h4",
-  pageHeader: "h5",
-  body: "p",
-  label: "p",
+  displayXLSerifRegular: "h1",
+  displayLSerifRegular: "h2",
+  displayMSerifRegular: "h3",
+  displaySSansSemiBold: "h4",
+  displaySSansRegular: "h4",
+  displaySSerifRegular: "h4",
+  pageHeaderSerifRegular: "h4",
+  sectionHeaderSansMedium: "h5",
+  subheadingSansRegular: "h5",
+  subheadingSansMedium: "h5",
+  paragraphSansRegular: "p",
+  paragraphSansMedium: "p",
+  labelSansRegular: "p",
 };
 
 export const Variant = (variant: TypographyVariant) =>
@@ -25,8 +31,6 @@ export const Variant = (variant: TypographyVariant) =>
         .map((key) => `${key}: ${variant[key]};`)
         .join("")
     : "";
-export const Italic = "font-style: italic";
-export const Strikethrough = "text-decoration: line-through";
 export const Align = (align: StandardPropertiesHyphen["text-align"]) =>
   `text-align: ${align}`;
 
@@ -50,39 +54,33 @@ export const MaxLines = (
 
 export const TypographyStyles = ({
   theme,
-  variant = "body",
+  variant = "paragraphSansRegular",
   color = "primary",
-  font,
-  italic,
   align,
   truncate,
   maxLines,
-  strikethrough,
 }: TypographyProps & { theme?: DefaultTheme }) => {
   const _theme = theme ? theme["typography"] || lightTheme : lightTheme;
   const _variant = typeof variant === "string" ? variant : variant.mobile;
-  const _font = font || "sans";
   return `
     margin: 0;
     padding: 0;
     color: ${_theme["color"][color]};
-    ${Variant(_theme[_font][_variant])};
-    ${italic ? Italic : ""};
+    ${Variant(_theme["font"][_variant])};
     ${align ? Align(align) : ""};
-    ${strikethrough ? Strikethrough : ""};
     ${truncate ? Truncate : ""};
     ${
       maxLines && maxLines > 0
-        ? MaxLines(maxLines, _theme[_font][_variant]["lineHeight"])
+        ? MaxLines(maxLines, _theme["font"][_variant]["lineHeight"])
         : ""
     };
 
     @media only screen and (min-width: 768px) {
-      ${typeof variant === "object" && variant.tablet ? Variant(_theme[_font][variant.tablet]) : ""}
+      ${typeof variant === "object" && variant.tablet ? Variant(_theme["font"][variant.tablet]) : ""}
     }
 
     @media only screen and (min-width: 1280px) {
-      ${typeof variant === "object" && variant.desktop ? Variant(_theme[_font][variant.desktop]) : ""}
+      ${typeof variant === "object" && variant.desktop ? Variant(_theme["font"][variant.desktop]) : ""}
     }
   `;
 };
