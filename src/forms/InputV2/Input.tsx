@@ -4,10 +4,10 @@ import uniqueId from 'lodash/uniqueId';
 import { Spacer } from "../../Spacer";
 import { InputContainer } from "./styles";
 import { InputProps } from "./types";
-import { Typography } from "../../Typography";
 import { Label } from "../Label";
 import { ErrorText } from "../ErrorText";
 import { useCombinedRefs } from "../UseCombinedRefs";
+import { HelperText } from "forms/HelperText";
 
 export const Input = React.forwardRef<HTMLInputElement, InputProps>(({
   error,
@@ -24,7 +24,7 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(({
 
   return (
     <>
-      {label && <Label hasError={!!error} htmlFor={inputId}>{label}</Label>}
+      {label && <Label error={!!error} htmlFor={inputId}>{label}</Label>}
       <InputContainer
         error={!!error}
         disabled={inputElementProps.disabled}
@@ -36,7 +36,7 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(({
         <input ref={combinedRef} {...inputElementProps} id={inputId} />
         {suffixNode ?? <Spacer size={16} />}
       </InputContainer>
-      {helper && typeof error !== "string" && <Typography variant="label">{helper}</Typography>}
+      {helper && typeof error !== "string" && <HelperText error={error}>{helper}</HelperText>}
       {typeof error === "string" && <ErrorText>{error}</ErrorText>}
     </>
   );

@@ -1,9 +1,6 @@
 import styled from "styled-components";
+import { TypographyProps, TypographyStyles } from "../Typography";
 
-import { TextCss } from "./TextCss";
-
-export const HelperText = styled.p`
-  ${TextCss}
-  padding: 0;
-  margin: 0;
+export const HelperText = styled.p<Omit<TypographyProps, "color" | "variant"> & {error?: boolean}>`
+  ${({error, ...props}) => TypographyStyles({...props, color: error ? "error" : "primary", variant: "labelSansRegular"})}
 `;

@@ -1,12 +1,12 @@
 import * as React from "react";
 import { useForm } from "react-hook-form";
 import { Button } from "../../forms/Button";
-import { ErrorText } from "../../forms/ErrorText";
 import { HelperText } from "../../forms/HelperText";
 import { Input } from "../../forms/Input";
 import { Label } from "../../forms/Label";
 import { Spacer } from "../../Spacer";
 import { Container, emailRegex, FormField, FormFields, phoneRegex, ToggleShowPasswordButton } from "./common";
+import { ErrorText } from "forms/ErrorText";
 
 interface ISignupFormInputs {
   first: string,
@@ -38,7 +38,7 @@ export const SignupFormReactFormHooks: React.FC<{}> = () => {
     <Container>
       <FormFields template={formLayoutTemplate}>
         <FormField name="firstName">
-          <Label hasError={!!errors.first?.message}>
+          <Label error={!!errors.first?.message}>
             First Name
             <Input
               {...register('first', { required: "Please Enter a first name" })}
@@ -50,7 +50,7 @@ export const SignupFormReactFormHooks: React.FC<{}> = () => {
           </Label>
         </FormField>
         <FormField name="lastName">
-          <Label hasError={!!errors.last?.message}>
+          <Label error={!!errors.last?.message}>
             Last Name
             <Input
               {...register('last', { required: "Please Enter a last name" })}
@@ -61,7 +61,7 @@ export const SignupFormReactFormHooks: React.FC<{}> = () => {
           </Label>
         </FormField>
         <FormField name="email">
-          <Label hasError={!!errors.email?.message}>
+          <Label error={!!errors.email?.message}>
             Email
             <Input
               {...register('email', { required: true, pattern: { value: emailRegex, message: "Enter a valid email" } })}
@@ -72,7 +72,7 @@ export const SignupFormReactFormHooks: React.FC<{}> = () => {
           </Label>
         </FormField>
         <FormField name="phone">
-          <Label hasError={!!errors.phone?.message}>
+          <Label error={!!errors.phone?.message}>
             Phone
             <Input
               {...register('phone', { required: true, pattern: { value: phoneRegex, message: "Enter a valid phone number "} })}
@@ -83,7 +83,7 @@ export const SignupFormReactFormHooks: React.FC<{}> = () => {
           </Label>
         </FormField>
         <FormField name="password">
-          <Label hasError={!!errors.password?.message}>
+          <Label error={!!errors.password?.message}>
             Password
             <Input
               {...register('password', { required: true, minLength: { value: 4, message: "Password must be more than 4 characters" } })}
