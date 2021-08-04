@@ -7,7 +7,7 @@ import { InputProps } from "./types";
 import { Label } from "../Label";
 import { ErrorText } from "../ErrorText";
 import { useCombinedRefs } from "../UseCombinedRefs";
-import { HelperText } from "forms/HelperText";
+import { HelperText } from "../HelperText";
 
 export const Input = React.forwardRef<HTMLInputElement, InputProps>(({
   error,

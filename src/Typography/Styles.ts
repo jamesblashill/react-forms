@@ -1,6 +1,9 @@
 import { StandardPropertiesHyphen } from "csstype";
 import styled, { DefaultTheme } from "styled-components";
 
+import { breakpoints } from "../theme";
+import { MediaQueries } from "../Media2Strings";
+
 import { lightTheme } from "./Themes";
 import {
   TypographyVariant,
@@ -60,7 +63,8 @@ export const TypographyStyles = ({
   truncate,
   maxLines,
 }: TypographyProps & { theme?: DefaultTheme }) => {
-  const _theme = theme ? theme["typography"] || lightTheme : lightTheme;
+  const _theme = theme && Object.entries(theme).length !== 0 ? theme["typography"] || lightTheme : lightTheme;
+  const mediaQueries = theme && Object.entries(theme).length !== 0 ? theme["mediaQueries"] : new MediaQueries(breakpoints);
   const _variant = typeof variant === "string" ? variant : variant.mobile;
   return `
     margin: 0;
@@ -75,11 +79,11 @@ export const TypographyStyles = ({
         : ""
     };
 
-    @media only screen and (min-width: 768px) {
+    ${mediaQueries.tabletAndAbove} {
       ${typeof variant === "object" && variant.tablet ? Variant(_theme["fonts"][variant.tablet]) : ""}
     }
 
-    @media only screen and (min-width: 1280px) {
+    ${mediaQueries.desktopAndAbove} {
       ${typeof variant === "object" && variant.desktop ? Variant(_theme["fonts"][variant.desktop]) : ""}
     }
   `;

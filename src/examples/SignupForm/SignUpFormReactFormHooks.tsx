@@ -6,7 +6,7 @@ import { Input } from "../../forms/Input";
 import { Label } from "../../forms/Label";
 import { Spacer } from "../../Spacer";
 import { Container, emailRegex, FormField, FormFields, phoneRegex, ToggleShowPasswordButton } from "./common";
-import { ErrorText } from "forms/ErrorText";
+import { ErrorText } from "../../forms/ErrorText";
 
 interface ISignupFormInputs {
   first: string,

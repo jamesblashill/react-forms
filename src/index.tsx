@@ -1,4 +1,3 @@
-import { Breakpoints, MediaQueries } from "Media2Strings";
 import React from "react";
 import { render } from "react-dom";
 import { BrowserRouter as Router, Link, Route, Switch } from "react-router-dom";
