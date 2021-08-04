@@ -3,6 +3,14 @@ import { Typography } from '../Typography';
 
 export const TypographyExample: React.FC<{}> = () => (
   <div>
-    <Typography>This is a test</Typography>
+    <Typography
+      variant={{
+        mobile: "body",
+        tablet: "pageHeader",
+        desktop: "displayS"
+      }}
+    >
+      This is a test
+    </Typography>
   </div>
 );

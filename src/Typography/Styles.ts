@@ -60,27 +60,36 @@ export const TypographyStyles = ({
   strikethrough,
 }: TypographyProps & { theme?: DefaultTheme }) => {
   const _theme = theme ? theme["typography"] || lightTheme : lightTheme;
+  const _variant = typeof variant === "string" ? variant : variant.mobile;
   const _font = font || "sans";
   return `
     margin: 0;
     padding: 0;
     color: ${_theme["color"][color]};
-    ${Variant(_theme[_font][variant])};
+    ${Variant(_theme[_font][_variant])};
     ${italic ? Italic : ""};
     ${align ? Align(align) : ""};
     ${strikethrough ? Strikethrough : ""};
     ${truncate ? Truncate : ""};
     ${
       maxLines && maxLines > 0
-        ? MaxLines(maxLines, _theme[_font][variant]["lineHeight"])
+        ? MaxLines(maxLines, _theme[_font][_variant]["lineHeight"])
         : ""
     };
+
+    @media only screen and (min-width: 768px) {
+      ${typeof variant === "object" && variant.tablet ? Variant(_theme[_font][variant.tablet]) : ""}
+    }
+
+    @media only screen and (min-width: 1280px) {
+      ${typeof variant === "object" && variant.desktop ? Variant(_theme[_font][variant.desktop]) : ""}
+    }
   `;
 };
 
 export const Typography = styled.p.attrs<TypographyProps>(
   ({ as, variant = "body" }) => ({
-    as: as || variantTagMap[variant],
+    as: as || variantTagMap[typeof variant === "object" ? variant.mobile : variant],
   })
 )<TypographyProps>`
   ${(props) => TypographyStyles(props)}

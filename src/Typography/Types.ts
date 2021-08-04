@@ -9,6 +9,12 @@ export type TypographyVariants =
   | "body"
   | "label";
 
+export type ResponsiveTypographyVariants = {
+  mobile: TypographyVariants;
+  tablet?: TypographyVariants;
+  desktop?: TypographyVariants;
+}
+
 export type TypographyTags = "h1" | "h2" | "h3" | "h4" | "h5" | "p" | "span" | "label";
 export type Font = "serif" | "sans";
 export type Color = "primary" | "secondary" | "tertiary" | "error";
@@ -30,7 +36,7 @@ export interface TypographyProps {
   /** The tag rendered to the dom */
   as?: TypographyTags;
   /** The set of base css font styles to be applied to the component */
-  variant?: TypographyVariants;
+  variant?: TypographyVariants | ResponsiveTypographyVariants;
   /** Uses a serif font instead of a sansSerif font */
   font?: Font;
   /** Sets the font color */
