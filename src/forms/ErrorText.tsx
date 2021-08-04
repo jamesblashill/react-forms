@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import { Typography } from "../Typography";
+import { TypographyProps, TypographyStyles } from "../Typography";
 
-export const ErrorText = styled(Typography).attrs({ variant: 'label' })`
-  color: ${(props) => props.theme.form.input.errorColor};
+export const ErrorText = styled.p<Omit<TypographyProps, "color" | "variant">>`
+  ${props => TypographyStyles({...props, color: "error", variant: "labelSansRegular"})};
 `;

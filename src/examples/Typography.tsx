@@ -5,9 +5,9 @@ export const TypographyExample: React.FC<{}> = () => (
   <div>
     <Typography
       variant={{
-        mobile: "body",
-        tablet: "pageHeader",
-        desktop: "displayS"
+        mobile: "labelSansRegular",
+        tablet: "paragraphSansMedium",
+        desktop: "displayXLSerifRegular"
       }}
     >
       This is a test

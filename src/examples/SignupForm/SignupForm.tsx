@@ -1,7 +1,7 @@
 import * as React from "react";
 import { Button } from "../../forms/Button";
-import { ErrorText } from "../../forms/ErrorText";
 import { HelperText } from "../../forms/HelperText";
+import { ErrorText } from "../../forms/ErrorText";
 import { Input } from "../../forms/Input";
 import { Label } from "../../forms/Label";
 import { unboxFormEventValue } from "../../forms/unboxFormEventValue";
@@ -44,7 +44,7 @@ export const SignupForm: React.FC<{}> = () => {
           </Label>
         </FormField>
         <FormField name="lastName">
-          <Label hasError={lastInvalid}>
+          <Label error={lastInvalid}>
             Last Name
             <Input
               onChange={unboxFormEventValue(setLast)}

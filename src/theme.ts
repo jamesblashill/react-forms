@@ -13,7 +13,7 @@ import {
 } from "./Typography/Themes";
 import { checkboxDarkTheme, checkboxLightTheme } from "./forms/Checkbox";
 
-const breakpoints: Breakpoints = {
+export const breakpoints: Breakpoints = {
   tablet: 768,
   desktop: 1280
 }
