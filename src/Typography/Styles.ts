@@ -80,18 +80,18 @@ export const TypographyStyles = ({
     };
 
     ${mediaQueries.tabletAndAbove} {
-      ${typeof variant === "object" && variant.tablet ? Variant(_theme["fonts"][variant.tablet]) : ""}
+      ${typeof variant === "object" && variant.tabletAndAbove ? Variant(_theme["fonts"][variant.tabletAndAbove]) : ""}
     }
 
     ${mediaQueries.desktopAndAbove} {
-      ${typeof variant === "object" && variant.desktop ? Variant(_theme["fonts"][variant.desktop]) : ""}
+      ${typeof variant === "object" && variant.desktopAndAbove ? Variant(_theme["fonts"][variant.desktopAndAbove]) : ""}
     }
   `;
 };
 
 export const Typography = styled.p.attrs<TypographyProps>(
-  ({ as, variant = "body" }) => ({
-    as: as || variantTagMap[typeof variant === "object" ? variant.mobile : variant],
+  ({ as, variant = "paragraphSansRegular" }) => ({
+    as: as || variantTagMap[typeof variant === "object" ? variant.mobileAndAbove : variant],
   })
 )<TypographyProps>`
   ${(props) => TypographyStyles(props)}
