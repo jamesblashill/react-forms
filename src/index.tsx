@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Link, Route, Switch } from "react-router-dom";
 import styled, { ThemeProvider } from "styled-components";
 import { darkModeTheme, lightModeTheme } from "./theme";
 import { SignupForm } from "./examples/SignupForm/SignupForm";
+import { SignupFormCustom } from "./examples/SignupForm/SignupFormCustom";
 import { ISignUpFormValues, SignupFormFormik } from "./examples/SignupForm/SignupFormFormik";
 import { SignupFormReactFormHooks } from "./examples/SignupForm/SignUpFormReactFormHooks";
 import { SignupReactFinalForm } from "./examples/SignupForm/SignupReactFinalForm";
@@ -35,6 +36,9 @@ const App: React.FC<{}> = () => {
                 <Link to="/signup-react-final-form">SignupFormReactFormHooks</Link>
               </li>
               <li>
+                <Link to ="/signup-custom">SignupCustom</Link>
+              </li>
+              <li>
                 <Link to="/typography">Typography</Link>
               </li>
             </ul>
@@ -53,6 +57,9 @@ const App: React.FC<{}> = () => {
             </Route>
             <Route path="/signup-react-final-form">
               <SignupReactFinalForm />
+            </Route>
+            <Route path="/signup-custom">
+              <SignupFormCustom />
             </Route>
             <Route path="/typography">
               <TypographyExample />
